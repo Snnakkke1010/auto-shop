@@ -1,0 +1,10 @@
+{% extends 'main/base.html' %}
+
+{% block title %} Profile {% endblock %}
+
+{% block content %}
+    <div>
+        <h1>{{context.user.username}}</h1>
+        <img src="{{ context.av.url }}" alt="User Image">
+    </div>
+{% endblock %}
