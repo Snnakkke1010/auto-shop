@@ -3,9 +3,15 @@
 {% block title %} Update {% endblock %}
 
 {% block content %}
-    <form method="post">
-        {% csrf_token %}
-        {{form.as_p}}
-        <button type="submit">Update</button>
-    </form>
+    <section class="update container">
+        <div class="update__form">
+            <h2>Update Profile</h2>
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ profile_form.as_p }}
+                    {{ user_form.as_p }}
+                <button type="submit" class="update__form_btn">Save Changes</button>
+              </form>
+        </div>
+    </section>
 {% endblock %}

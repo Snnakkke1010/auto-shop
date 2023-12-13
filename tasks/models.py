@@ -1,3 +1,5 @@
+from users.models import Profile
+from django.contrib.auth.models import User
 from django.db import models
 
 
@@ -16,6 +18,7 @@ class ProductCategory(models.Model):
 
 class Product(models.Model):
 
+    creator = models.ForeignKey(Profile, verbose_name='Автор', null=True, on_delete=models.CASCADE, related_name='product')
     name = models.CharField(verbose_name='Назва продукта', max_length=255, null=True)
     cat = models.ForeignKey(ProductCategory, verbose_name='Категорія', null=True, on_delete=models.CASCADE)
     image = models.ImageField(verbose_name='Фото подукта', upload_to='product-img/', null=True)

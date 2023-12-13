@@ -3,51 +3,65 @@
 {% block title %} All products {% endblock %}
 
 {% block content %}
-<form method="get" action="{% url 'product_list' %}">
-    <label for="category">Filter by Category:</label>
-    <select name="category" id="category">
-        <option value="" selected>All Categories</option>
-        {% for category in categories %}
-            <option value="{{ category.slug }}" {% if category.slug == request.GET.category %}selected{% endif %}>{{ category.name }}</option>
-        {% endfor %}
-    </select>
 
-    <label for="in_stock">In Stock:</label>
-    <input type="checkbox" name="in_stock" {% if request.GET.in_stock %}checked{% endif %}>
+    <section class="shop container">
+        <div class="shop__filter">
+            <form method="get" action="{% url 'product_list' %}">
+                <label for="category">Сортування за категорією</label>
+                <select name="category" id="category">
+                    <option value="" selected>Всі категорії</option>
+                    {% for category in categories %}
+                        <option value="{{category.slug}}" {% if category.slug == request.GET.category %}selected{% endif %}>{{ category.name }}</option>
+                    {% endfor %}
+                </select>
+                <label for="in_stock">В наявності</label>
+                <input type="checkbox" name="in_stock" id="in_stock" {% if request.GET.in_stock %}checked{% endif %}>
+                <button type="submit" class="shop__button">Застосувати</button>
+            </form>
+            <form method="get" action="{% url 'product_list' %}" class="search">
+                {{ search.search_query }}
+                <button type="submit" class="shop__button">Пошук</button>
+            </form>
+        </div>
 
-    <button type="submit">Filter</button>
-</form>
+        <div class="shop__items">
+            <h1>Усі продукти</h1>
 
-<form method="get" action="{% url 'product_list' %}">
-    {{ search }}
-    <button type="submit">Search</button>
-</form>
+            <div class="shop__block">
+                {% for product in products %}
+                    <div class="shop__block__items">
+                        <img src="{{product.image.url}}">
+                        <h2>{{ product.name }}</h2>
+                        <p>Категорія: {{ product.cat.name }}</p>
+                        <p>Ціна: {{ product.price }} грн</p>
+                        <p>В наявності: {% if product.in_stock %}Так{% else %}<span>Ні</span>{% endif %}</p>
+                        <a href="{% url 'product_detail' pk=product.pk %}">Подробиці</a>
+                    </div>
 
-{% for product in products %}
-    <div>
-        <h2>{{ product.name }}</h2>
-        <p>Category: {{ product.cat.name }}</p>
-        <p>Price: {{ product.price }}</p>
-        <p>In Stock: {% if product.in_stock %}Yes{% else %}No{% endif %}</p>
-        <a href="{% url 'product_detail' pk=product.pk %}">Details</a>
-    </div>
-{% endfor %}
+                    {% if forloop.counter|divisibleby:3 and not forloop.last %}
+                        </div><div class="shop__block">
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
 
-<div class="pagination">
-    <span class="step-links">
-        {% if products.has_previous %}
-            <a href="?page=1">&laquo; first</a>
-            <a href="?page={{ products.previous_page_number }}">previous</a>
-        {% endif %}
+        <div class="pagination">
+            <span class="step-links">
+                {% if products.has_previous %}
+                    <a href="?page=1">Перша</a>
+                    <a href="?page={{ products.previous_page_number }}"><<</a>
+                {% endif %}
 
-        <span class="current">
-            Page {{ products.number }} of {{ products.paginator.num_pages }}.
-        </span>
+                <span class="current">
+                    Сторінка {{ products.number }} з {{ products.paginator.num_pages }}.
+                </span>
 
-        {% if products.has_next %}
-            <a href="?page={{ products.next_page_number }}">next</a>
-            <a href="?page={{ products.paginator.num_pages }}">last &raquo;</a>
-        {% endif %}
-    </span>
-</div>
+                {% if products.has_next %}
+                    <a href="?page={{ products.next_page_number }}"> >> </a>
+                    <a href="?page={{ products.paginator.num_pages }}">Остання</a>
+                {% endif %}
+            </span>
+        </div>
+
+    </section>
 {% endblock %}

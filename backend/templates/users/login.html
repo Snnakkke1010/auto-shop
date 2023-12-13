@@ -1,11 +1,16 @@
 {% extends 'main/base.html' %}
 
-{% block title %} Login page. {% endblock %}
+{% block title %}Login page{% endblock %}
 
 {% block content %}
-    <form method="post">
-        {% csrf_token %}
-        {{form.as_p}}
-        <button type="submit">Login</button>
-    </form>
+  <section class="login container">
+      <div class="login-form">
+        <h2 class="login-form__title">Login</h2>
+        <form method="post">
+          {% csrf_token %}
+          {{ form.as_p }}
+          <button type="submit" class="login-form__button">Login</button>
+        </form>
+      </div>
+  </section>
 {% endblock %}

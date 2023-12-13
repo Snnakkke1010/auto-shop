@@ -1,11 +1,43 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>{% block title %} TITLE {% endblock %}</title>
+<<<<<<< HEAD
 </head>
 <body>
     {% block header %} HEADER {% endblock %}
+
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <link rel="stylesheet" href="{% static 'css/products.css' %}">
+    <link rel="stylesheet" href="{% static 'css/users.css' %}">
+</head>
+<body>
+    {% block header %}
+        <header>
+             <nav class="nav container">
+                <div class="nav__logo">
+                    <h1>AUTO SHOP</h1>
+                </div>
+                <div class="nav__menu">
+                    <a href="{% url 'home' %}" class="nav__menu_link">Головна</a>
+                    <a href="{% url 'product_list' %}" class="nav__menu_link">Магазин</a>
+                    {% if user.is_authenticated %}
+                        <a href="{% url 'profile' user.profile.slug %}" class="nav__menu_link">{{ user|capfirst }}</a>
+                    {% else %}
+                        <a href="{% url 'login' %}" class="nav__menu_link">Увійти</a> | <a href="{% url 'register' %}" class="nav__menu_link">Зареєструватись</a>
+                    {% endif %}
+                </div>
+            </nav>
+        </header>
+    {% endblock %}
+
+
+
+
+
+>>>>>>> e72a3a9 (back full)
     {% block content %} HOME {% endblock %}
 </body>
 </html>

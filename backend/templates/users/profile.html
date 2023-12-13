@@ -3,8 +3,64 @@
 {% block title %} Profile {% endblock %}
 
 {% block content %}
-    <div>
-        <h1>{{context.user.username}}</h1>
-        <img src="{{ context.av.url }}" alt="User Image">
+    <div class="profile container">
+        <div class="profile__details">
+            <div class="profile__details_img">
+                <img src="{{ user_profile.av.url }}" alt="User Image">
+            </div>
+            <div class="profile__details_info">
+                <h2>{{ user_profile.user | capfirst }}</h2>
+                <p>{{ user_profile.user.first_name }} {{ user_profile.user.last_name }}</p>
+                <p>{{ user_profile.user.email }}</p>
+                <a href="{% url 'update' user_profile.slug %}" class="details__button">Змінити</a>
+                <a href="{% url 'add_product' %}" class="details__button">Створити</a>
+                <a href="{% url 'logout' %}" class="logout__button">Вийти</a>
+            </div>
+        </div>
+
+        <div class="profile__products">
+            <h1>Ваші продукти</h1>
+            <hr>
+
+            <div class="shop__items">
+                <div class="shop__block">
+                    {% for product in user_products %}
+                        <div class="shop__block__items">
+                            <img src="{{ product.image.url }}">
+                            <h2>{{ product.name }}</h2>
+                            <p>Категорія: {{ product.cat.name }}</p>
+                            <p>Ціна: {{ product.price }} грн</p>
+                            <p>В наявності: {% if product.in_stock %}Так{% else %}<span>Ні</span>{% endif %}</p>
+
+                            <!-- Additional product details and actions -->
+
+                            <a href="{% url 'product_detail' pk=product.pk %}">Подробиці</a>
+                        </div>
+
+                        {% if forloop.counter|divisibleby:3 and not forloop.last %}
+                            </div><div class="shop__block">
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="pagination">
+                <span class="step-links">
+                    {% if user_products.has_previous %}
+                        <a href="?page=1">Перша</a>
+                        <a href="?page={{ user_products.previous_page_number }}"><<</a>
+                    {% endif %}
+
+                    <span class="current">
+                        Сторінка {{ user_products.number }} з {{ user_products.paginator.num_pages }}.
+                    </span>
+
+                    {% if user_products.has_next %}
+                        <a href="?page={{ user_products.next_page_number }}"> >> </a>
+                        <a href="?page={{ user_products.paginator.num_pages }}">Остання</a>
+                    {% endif %}
+                </span>
+            </div>
+        </div>
     </div>
 {% endblock %}

@@ -3,10 +3,22 @@
 {% block title %} {{product.name}} {% endblock %}
 
 {% block content %}
-    <div>
-        {{product.name}}
-        {{product.cat}}
-        {{product.about}}
-        {{product.is_stock}}
-    </div>
+    <section class="product container">
+        <div class="product__detail">
+            <div class="product__image">
+                <img src="{{product.image.url}}">
+            </div>
+            <div class="product__details">
+                <h1>{{product.name}}</h1>
+                <span>{{product.cat}}</span>
+                <p>{{product.about}}</p>
+                {% if product.in_stock == True %}
+                    <h3>{{product.price }} $</h3>
+                    <a href="#">Купити</a>
+                {% else %}
+                    <h2>Продукта немає в наявності</h2>
+                {% endif %}
+            </div>
+        </div>
+    </section>
 {% endblock %}

@@ -2,4 +2,14 @@
 
 {% block title %} Home page. {% endblock %}
 
-{% block content %} Home page {% endblock %}
+{% block content %}
+<section class="home">
+    <div class="home__items container">
+        <div class="home__items_text">
+            <h1>Найкращі запчастини тільки у нас!</h1>
+            <p>Купуйте та продавайти авто запчастини на нашому сайті!</p>
+            <a href="{% url 'product_list' %}">Перейти в магазин</a>
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from django.shortcuts import render, redirect
 from django.shortcuts import render, get_object_or_404
@@ -23,12 +24,13 @@ def product_list(request):
     if in_stock:
         products = products.filter(in_stock=True)
 
+
     search_form = ProductSearchForm(request.GET)
     search_query = request.GET.get('search_query', '')
     if search_query:
         products = products.filter(Q(name__icontains=search_query))
 
-    paginator = Paginator(products, 2)
+    paginator = Paginator(products, 6)
     page = request.GET.get('page')
     try:
         products = paginator.page(page)
@@ -47,11 +49,14 @@ def product_detail(request, pk):
     return render(request, 'tasks/product_detail.html', {'product': product})
 
 
+@login_required
 def add_product(request):
     if request.method == 'POST':
         form = ProductForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
+            product = form.save(commit=False)
+            product.creator = request.user.profile
+            product.save()
             return redirect('product_list')
     else:
         form = ProductForm()

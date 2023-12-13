@@ -1,11 +1,24 @@
 {% extends 'main/base.html' %}
 
-{% block title %} Register page. {% endblock %}
+{% block title %}Registration page{% endblock %}
 
 {% block content %}
-    <form method="post">
-        {% csrf_token %}
-        {{form.as_p}}
-        <button type="submit">Login</button>
-    </form>
+    <section class="register">
+      <div class="register-form">
+        <h2 class="register-form__title">Register</h2>
+        <form method="post">
+          {% csrf_token %}
+          {% for field in form %}
+            <div class="form-group {% if field.errors %}has-error{% endif %}">
+              {{ field.label_tag }}
+              {{ field }}
+              {% if field.errors %}
+                <p class="error-message">{{ field.errors|striptags }}</p>
+              {% endif %}
+            </div>
+          {% endfor %}
+          <button type="submit" class="register-form__button">Register</button>
+        </form>
+      </div>
+    </section>
 {% endblock %}
