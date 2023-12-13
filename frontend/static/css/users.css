@@ -1,0 +1,182 @@
+.profile {
+    margin-top: 100px;
+}
+.profile__details {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.profile__details_img img {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.profile__details_info {
+    margin-left: 20px;
+}
+
+.profile__details_info h2 {
+    font-size: 32px;
+    margin-bottom: 10px;
+}
+
+.profile__details_info p {
+     margin: 5px 0;
+}
+
+.details__button, .logout__button {
+    display: inline-block;
+    background-color: #3498db;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none;
+    margin-right: 10px;
+}
+
+.details__button:hover, .logout__button:hover {
+    background-color: #2980b9;
+}
+
+.logout__button {
+    text-decoration: none;
+    background-color: red;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.logout__button:hover {
+    background: darkred;
+}
+
+.update {
+    margin-top: 100px;
+}
+
+.update__form {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+.update__form input[type="text"],
+.update__form input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    box-sizing: border-box;
+}
+
+.update__form_btn {
+    background-color: #3498db;
+    color: white;
+    padding: 10px 15px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.update__form_btn:hover {
+    background-color: #2980b9;
+}
+
+.update__form input[type="text"]:focus,
+.update__form input[type="password"]:focus {
+    border: 2px solid #3498db;
+}
+
+.login {
+    margin-top: 120px;
+}
+
+.login input[type='text'],
+input[type='password'] {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    box-sizing: border-box;
+}
+
+.login-form {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f4f4f4;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.login-form__title {
+  text-align: center;
+}
+
+.login-form__button {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  background-color: #3498db;
+  color: #fff;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.login-form__button:hover {
+    background: #2980b9;
+}
+
+.register {
+    margin-top: 120px;
+}
+
+.register input[type='password'],
+input[type='text'] {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    box-sizing: border-box;
+}
+
+.register-form {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f4f4f4;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.register-form__title {
+  text-align: center;
+}
+
+.register-form__button {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  background-color: #3498db;
+  color: #fff;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.register-form__button:hover {
+    background: #2980b9;
+}
